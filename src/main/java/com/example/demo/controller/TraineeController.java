@@ -41,26 +41,48 @@ public class TraineeController {
 		return response;
 	}
 
+	// ------------------------------------------------------------------------------------------
+	
 	// http://localhost:8082/updateemptrainee
 	@PutMapping("/updatetrainee")
-	public Trainee updateEmp(@RequestBody Trainee trainee) {
-		System.out.println("Controller updateTrainee");
-		return traineeservice.updateTrainee(trainee);
+	public ResponseEntity<Trainee> updateTrainee(@RequestBody Trainee trainee) {
+		LOG.info("updateTrainee");
+		Trainee updateTrainee = traineeservice.updateTrainee(trainee);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", ""+ trainee +" updated successfully");
+		LOG.info(headers.toString());
+		ResponseEntity<Trainee> response = new ResponseEntity<Trainee>(updateTrainee, headers, HttpStatus.OK);
+		return response;
 	}
 
+	// ------------------------------------------------------------------------------------------
+	
 	@GetMapping("/viewTraineeByCourseId")
-	public Trainee viewTrainee(int courseId) {
+	public ResponseEntity<Trainee> viewTrainee(int courseId) {
 		LOG.info("viewTraineeByCourseId");
-		return traineeservice.viewTrainee(courseId);
+		Trainee viewTraineeByCourseId = traineeservice.viewTrainee(courseId);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Data of Trainee with "+ courseId + " retrived successfully from the database");
+		LOG.info(headers.toString());
+		ResponseEntity<Trainee> response = new ResponseEntity<Trainee>(viewTraineeByCourseId, headers, HttpStatus.OK);
+		return response;
 	}
 
+	// ------------------------------------------------------------------------------------------
+	
 	@GetMapping("/viewAllTrainee")
-	public List<Trainee> viewAllTrainee() 
+	public ResponseEntity<List<Trainee>> viewAllTrainee() 
 	{
 		LOG.info("viewAllTraineesByLocation");
-	    return traineeservice.viewAllTrainee();
+		List<Trainee> viewAllTrainee=traineeservice.viewAllTrainee();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "All Trainees data retrieved successfully from the database.");
+		LOG.info(headers.toString());
+		ResponseEntity<List<Trainee>> response = new ResponseEntity<>(viewAllTrainee, headers, HttpStatus.OK);
+		return response; 
 	}
 
+	// ------------------------------------------------------------------------------------------
 		
 	@DeleteMapping(path = "deleteTraineeByCourseId/{courseId}")
 	public ResponseEntity<Trainee> deleteTrainee(@PathVariable(name= "courseId") int courseId) throws NoSuchRecordException 
@@ -68,23 +90,38 @@ public class TraineeController {
 		LOG.info("deleteTraineeByCourseId");
 		Trainee t = traineeservice.deleteTrainee(courseId);
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "Employee deleted successfully.");
+		headers.add("message", "Trainee with "+ courseId +" deleted successfully.");
+		LOG.info(headers.toString());
 		ResponseEntity<Trainee> response = new ResponseEntity<Trainee>(t, headers, HttpStatus.OK);
 		return response;
 	}
 
+	// ------------------------------------------------------------------------------------------
+	
 	@GetMapping("/viewAllTraineesByLocation/{location}")
-	public List<Trainee> viewAllTraineesByLocation(String location)
+	public ResponseEntity<List<Trainee>> viewAllTraineesByLocation(String location)
 	{
 		LOG.info("viewAllTraineesByLocation");
-	    return traineeservice.viewAllTraineesByLocation(location);
+		List<Trainee> list=traineeservice.viewAllTraineesByLocation(location);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Trainees from \"" + location + "\" are successfully retrieved from the database.");
+		LOG.info(headers.toString());
+		ResponseEntity<List<Trainee>> response = new ResponseEntity<>(list, headers, HttpStatus.OK);
+	    return response;
 	}
 
+	// ------------------------------------------------------------------------------------------
+	
 	@GetMapping("/viewbyaadharno/{aadharNo}")
-	public Trainee viewTraineeByAadhar(@PathVariable long aadharNo) 
+	public ResponseEntity<Trainee> viewTraineeByAadhar(@PathVariable long aadharNo) 
 	{
 		LOG.info("getTraineeByAadharNo");
-		return traineeservice.viewTraineeByAadhar(aadharNo);
+		Trainee traineeByAadaharNo=traineeservice.viewTraineeByAadhar(aadharNo);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Trainee macthing with \"" + aadharNo + "\" is successfully retrieved from the database.");
+		LOG.info(headers.toString());
+		ResponseEntity<Trainee> response = new ResponseEntity<>(traineeByAadaharNo, headers, HttpStatus.OK);
+		return response;
 		
 	}
 
