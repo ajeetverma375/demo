@@ -23,6 +23,7 @@ public class Trainee
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Trainee_id")
 	private Integer traineeId;
 	
 	@Column(name="UserName" , nullable=false)
@@ -48,14 +49,14 @@ public class Trainee
 	@Column(name="contact" , nullable=false)
 	@NotEmpty
 	@Size(min=10, message="user name should have atleast 10 charachters")
-	private long contact;
+	private String contact;
 	
 	@Column(name="Email" , nullable=false)
 	@NotEmpty
 	@Email
 	private String email;
 	
-	@Column(name="FamilyInfo" , nullable=false)
+	@Column(name="FamilyInfo" )
 	private String familyInfo;
 	
 	@Column(name="AadharNo" , nullable=false , unique=true)
@@ -72,9 +73,9 @@ public class Trainee
 	
 	
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "Training_course")
-//  	private TrainingCourse trainingCourse;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Training_course")
+  	private TrainingCourse trainingCourse;
 	
 //	@OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "Feedback")
@@ -89,10 +90,10 @@ public class Trainee
 			@NotEmpty @Size(min = 8, message = "user name should have atleast 8 charachters") String password,
 			@NotEmpty @Size(min = 3, message = "user name should have atleast 3 charachters") String firstName,
 			@NotEmpty @Size(min = 3, message = "user name should have atleast 3 charachters") String lastName,
-			@NotEmpty @Size(min = 10, message = "user name should have atleast 10 charachters") long contact,
+			@NotEmpty @Size(min = 10, message = "user name should have atleast 10 charachters") String contact,
 			@NotEmpty @Email String email, String familyInfo,
 			@NotEmpty @Size(min = 12, message = "user name should have atleast 12 charachters") long aadharNo,
-			LocalDate dob, String location) {
+			LocalDate dob, String location,TrainingCourse trainingCourse) {
 		super();
 		this.traineeId = traineeId;
 		this.userName = userName;
@@ -105,6 +106,7 @@ public class Trainee
 		this.aadharNo = aadharNo;
 		this.dob = dob;
 		this.location = location;
+		this.trainingCourse=trainingCourse;
 	}
 
 	public Integer getTraineeId() {
@@ -137,10 +139,10 @@ public class Trainee
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public long getContact() {
+	public String getContact() {
 		return contact;
 	}
-	public void setContact(long contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 	public String getEmail() {
@@ -167,12 +169,7 @@ public class Trainee
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
-//	public TrainingCourse getTrainingCourse() {
-//		return trainingCourse;
-//	}
-//	public void setTrainingCourse(TrainingCourse trainingCourse) {
-//		this.trainingCourse = trainingCourse;
-//	}
+
 //	public FeedBack getFeedBack() {
 //		return feedBack;
 //	}
@@ -187,13 +184,21 @@ public class Trainee
 		this.location = location;
 	}
 	
-
+	public TrainingCourse getTrainingCourse() {
+		return trainingCourse;
+	}
+	public void setTrainingCourse(TrainingCourse trainingCourse) {
+		this.trainingCourse = trainingCourse;
+	}
 	@Override
 	public String toString() {
 		return "Trainee [traineeId=" + traineeId + ", userName=" + userName + ", password=" + password + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", contact=" + contact + ", email=" + email + ", familyInfo="
-				+ familyInfo + ", aadharNo=" + aadharNo + ", dob=" + dob + ", location=" + location + "]";
+				+ familyInfo + ", aadharNo=" + aadharNo + ", dob=" + dob + ", location=" + location
+				+ ", trainingCourse=" + trainingCourse + "]";
 	}
+	
+	
 	
 	
 	

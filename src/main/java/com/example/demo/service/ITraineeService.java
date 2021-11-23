@@ -12,7 +12,7 @@ public interface ITraineeService
 {
 	Trainee addTrainee(Trainee course) throws InvalidFieldException, TraineeNotFoundException;
 	Trainee updateTrainee(Trainee course);
-	Trainee viewTrainee(int courseId);
+	public Trainee viewTrainee(int courseId);
 	List<Trainee> viewAllTrainee();
 	Trainee deleteTrainee(int courseId);
 	List<Trainee> viewAllTraineesByLocation(String location);
