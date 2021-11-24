@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.TrainingCourse;
-import com.example.demo.service.ITrainingCourseService;
+import com.example.demo.service.TrainingCourseService;
 
 @RestController
 public class TrainingCourseController {
 	private static final Logger LOG = LoggerFactory.getLogger(TrainingCourseController.class);
 
 	@Autowired
-	private ITrainingCourseService itrainingCourseService;
+	private TrainingCourseService itrainingCourseService;
 
 	// ------------------------------------------------------------------------------------------
 

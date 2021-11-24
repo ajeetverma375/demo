@@ -14,8 +14,8 @@ import com.example.demo.model.TrainingCourse;
 import com.example.demo.repository.ITrainingCourseRepository;
 
 @Service
-public class ITrainingCourseService implements TrainingServices{
-	private static final Logger LOG = LoggerFactory.getLogger(ITrainingCourseService.class);
+public class TrainingCourseService implements ITrainingCourseServices{
+	private static final Logger LOG = LoggerFactory.getLogger(TrainingCourseService.class);
 	@Autowired
       ITrainingCourseRepository trainrepo;
       @Override

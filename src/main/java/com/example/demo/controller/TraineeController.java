@@ -29,17 +29,7 @@ public class TraineeController {
 	@Autowired
 	private TraineeServiceImpl traineeservice;
 
-	@PostMapping(path = "/trainee")
-	public ResponseEntity<Trainee> addTrainee(@RequestBody Trainee course)
-			throws InvalidFieldException, TraineeNotFoundException {
-		ResponseEntity<Trainee> response = null;
-		Trainee t = traineeservice.addTrainee(course);
-		System.out.println("Trainee add");
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "trainee added to database");
-		response = new ResponseEntity<Trainee>(t, headers, HttpStatus.CREATED);
-		return response;
-	}
+
 
 	// ------------------------------------------------------------------------------------------
 	

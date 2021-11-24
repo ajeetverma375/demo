@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.model.TrainingCourse;
 
 
-public interface TrainingServices {
+public interface ITrainingCourseServices {
 		
 		
 		TrainingCourse addTrainingCourse(TrainingCourse course);
