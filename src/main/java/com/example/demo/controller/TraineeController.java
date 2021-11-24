@@ -29,6 +29,16 @@ public class TraineeController {
 	@Autowired
 	private TraineeServiceImpl traineeservice;
 
+	@PostMapping("/addtrainee")
+	public ResponseEntity<Trainee> addTrainee(@RequestBody Trainee trainee) 
+	{LOG.info("addTrainee");
+	Trainee addTrainee=traineeservice.addTrainee(trainee);
+	HttpHeaders headers=new HttpHeaders();
+	headers.add("message", "Trainee added successfully");
+	ResponseEntity<Trainee> response =new ResponseEntity<Trainee>(addTrainee,headers,HttpStatus.CREATED);
+	return response;
+		
+	}
 
 
 	// ------------------------------------------------------------------------------------------
